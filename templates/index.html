@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Video İndir</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e1c2f, #3b3b5b);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 30px;
+    }
+
+    .form-container {
+      margin: 30px auto;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #00c896;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .card {
+      background-color: #1f1f1f;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 16px;
+      width: 300px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .profile img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+
+    .buttons button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .reklam-alani {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      padding: 15px;
+      margin: 20px auto;
+      width: 320px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TikTok Video İndir</h1>
+
+  <div class="form-container" id="form-container">
+    <form id="indirForm">
+      <input type="text" id="url" placeholder="TikTok video bağlantısını yapıştırın" required>
+      <button type="submit">İndir</button>
+    </form>
+  </div>
+
+  <div id="reklam-giris" class="reklam-alani">
+    <!-- Giriş ekranı alt reklam -->
+    Reklam Alanı (Giriş Ekranı Altı)
+  </div>
+
+  <div id="sonuc"></div>
+
+  <script>
+    const form = document.getElementById('indirForm');
+    const sonucDiv = document.getElementById('sonuc');
+    const formContainer = document.getElementById('form-container');
+    const reklamGiris = document.getElementById('reklam-giris');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const url = document.getElementById('url').value.trim();
+      if (!url) return alert('Lütfen geçerli bir bağlantı girin');
+
+      try {
+        const response = await fetch(`/indir?url=${encodeURIComponent(url)}`);
+        const data = await response.json();
+
+        if (data.error) return alert(data.error);
+
+        formContainer.style.display = 'none';
+        reklamGiris.style.display = 'none';
+
+        sonucDiv.innerHTML = `
+          <div id="reklam-ust" class="reklam-alani">
+            <!-- Kart üst reklam -->
+            Reklam Alanı (Kart Üstü)
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <img src="${data.profil_resmi}" alt="Profil">
+              <div>
+                <strong>@${data.kullanici_adi}</strong>
+              </div>
+            </div>
+            <p>${data.aciklama}</p>
+            <div class="buttons">
+              <button onclick="indir('${data.video}', 'filigransiz.mp4')">Filigransız İndir</button>
+              <button onclick="indir('${data.filigranli}', 'filigranli.mp4')">Filigranlı İndir</button>
+              <button onclick="indir('${data.mp3}', 'ses.mp3')">MP3 Olarak İndir</button>
+            </div>
+          </div>
+
+          <div id="reklam-alt" class="reklam-alani">
+            <!-- Kart alt reklam -->
+            Reklam Alanı (Kart Altı)
+          </div>
+        `;
+      } catch (err) {
+        alert('Bir hata oluştu: ' + err.message);
+      }
+    });
+
+    function indir(url, dosyaAdi) {
+      fetch(url)
+        .then(res => res.blob())
+        .then(blob => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = dosyaAdi;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+    }
+  </script>
+</body>
+</html>
