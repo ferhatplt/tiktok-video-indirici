@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TikTok Video İndir</title>
 
-  <!-- Google AdSense Otomatik Reklam Kodu -->
+  <!-- Google AdSense başlangıç kodu -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5508343587267822"
           crossorigin="anonymous"></script>
+  <!-- /AdSense -->
 
   <style>
     body {
@@ -73,6 +74,16 @@
       width: 100%;
       margin: 10px 0;
     }
+
+    .reklam-alani {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      padding: 15px;
+      margin: 20px auto;
+      width: 320px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -91,6 +102,7 @@
     const form = document.getElementById('indirForm');
     const sonucDiv = document.getElementById('sonuc');
     const formContainer = document.getElementById('form-container');
+    const reklamGiris = document.getElementById('reklam-giris');
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
