@@ -79,16 +79,6 @@
       width: 100%;
       margin: 10px 0;
     }
-
-    .reklam-alani {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ccc;
-      padding: 15px;
-      margin: 20px auto;
-      width: 320px;
-      border-radius: 10px;
-      font-size: 14px;
-    }
   </style>
 </head>
 <body>
@@ -101,18 +91,12 @@
     </form>
   </div>
 
-  <div id="reklam-giris" class="reklam-alani">
-    <!-- Giriş ekranı alt reklam -->
-    Reklam Alanı (Giriş Ekranı Altı)
-  </div>
-
   <div id="sonuc"></div>
 
   <script>
     const form = document.getElementById('indirForm');
     const sonucDiv = document.getElementById('sonuc');
     const formContainer = document.getElementById('form-container');
-    const reklamGiris = document.getElementById('reklam-giris');
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -126,14 +110,8 @@
         if (data.error) return alert(data.error);
 
         formContainer.style.display = 'none';
-        reklamGiris.style.display = 'none';
 
         sonucDiv.innerHTML = `
-          <div id="reklam-ust" class="reklam-alani">
-            <!-- Kart üst reklam -->
-            Reklam Alanı (Kart Üstü)
-          </div>
-
           <div class="card">
             <div class="profile">
               <img src="${data.profil_resmi}" alt="Profil">
@@ -147,11 +125,6 @@
               <button onclick="indir('${data.filigranli}', 'filigranli.mp4')">Filigranlı İndir</button>
               <button onclick="indir('${data.mp3}', 'ses.mp3')">MP3 Olarak İndir</button>
             </div>
-          </div>
-
-          <div id="reklam-alt" class="reklam-alani">
-            <!-- Kart alt reklam -->
-            Reklam Alanı (Kart Altı)
           </div>
         `;
       } catch (err) {
