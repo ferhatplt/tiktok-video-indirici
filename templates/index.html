@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TikTok Video İndir</title>
 
+  <!-- SEO Meta Etiketleri -->
+  <meta name="description" content="TikTok videolarını ücretsiz ve hızlı bir şekilde indir. Filigransız, filigranlı ve MP3 seçenekleriyle TikTok video indirici.">
+  <meta name="keywords" content="tiktok video indir, tiktok mp3 indir, tiktok indirici, filigransız video indir, video dönüştürücü">
+  <meta name="robots" content="index, follow">
+
   <!-- Google AdSense başlangıç kodu -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5508343587267822"
           crossorigin="anonymous"></script>
@@ -96,6 +101,11 @@
     </form>
   </div>
 
+  <div id="reklam-giris" class="reklam-alani">
+    <!-- Giriş ekranı alt reklam -->
+    Reklam Alanı (Giriş Ekranı Altı)
+  </div>
+
   <div id="sonuc"></div>
 
   <script>
@@ -116,8 +126,14 @@
         if (data.error) return alert(data.error);
 
         formContainer.style.display = 'none';
+        reklamGiris.style.display = 'none';
 
         sonucDiv.innerHTML = `
+          <div id="reklam-ust" class="reklam-alani">
+            <!-- Kart üst reklam -->
+            Reklam Alanı (Kart Üstü)
+          </div>
+
           <div class="card">
             <div class="profile">
               <img src="${data.profil_resmi}" alt="Profil">
@@ -131,6 +147,11 @@
               <button onclick="indir('${data.filigranli}', 'filigranli.mp4')">Filigranlı İndir</button>
               <button onclick="indir('${data.mp3}', 'ses.mp3')">MP3 Olarak İndir</button>
             </div>
+          </div>
+
+          <div id="reklam-alt" class="reklam-alani">
+            <!-- Kart alt reklam -->
+            Reklam Alanı (Kart Altı)
           </div>
         `;
       } catch (err) {
