@@ -21,6 +21,13 @@ def indir():
     try:
         response = requests.get(api_url)
         data = response.json()
+
+    from flask import send_from_directory
+
+@app.route('/googlea9723dd352217b44.html')
+def dogrulama_dosyasi():
+    return send_from_directory('.', 'googlea9723dd352217b44.html')
+
     except Exception as e:
         return jsonify({"error": f"API isteği başarısız: {str(e)}"}), 500
 
