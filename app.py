@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import requests
 
@@ -21,13 +21,6 @@ def indir():
     try:
         response = requests.get(api_url)
         data = response.json()
-
-    from flask import send_from_directory
-
-@app.route('/googlea9723dd352217b44.html')
-def dogrulama_dosyasi():
-    return send_from_directory('.', 'googlea9723dd352217b44.html')
-
     except Exception as e:
         return jsonify({"error": f"API isteği başarısız: {str(e)}"}), 500
 
@@ -45,6 +38,10 @@ def dogrulama_dosyasi():
     else:
         return jsonify({"error": "Video bilgileri alınamadı!"}), 500
 
+# Doğrulama dosyası route'u
+@app.route('/googlea9723dd352217b44.html')
+def dogrulama_dosyasi():
+    return send_from_directory('.', 'googlea9723dd352217b44.html')
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=10000)
-
